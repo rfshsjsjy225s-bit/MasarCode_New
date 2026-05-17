@@ -87,3 +87,6 @@ jinja2.exceptions.UndefinedError: 'form' is undefined
 2026-05-16 17:50:17,947 WARNING: 404 ÎØÃ: /static/css/style.css [in F:\ÈÇíËæä\æßÇáÉ 2\app.py:132]
 2026-05-16 17:50:19,370 WARNING: 404 ÎØÃ: /favicon.ico [in F:\ÈÇíËæä\æßÇáÉ 2\app.py:132]
 2026-05-17 19:44:43,936 INFO: MasarCode Agency Started [in F:\ÈÇíËæä\æßÇáÉ 2\app.py:35]
+2026-05-17 20:00:39,079 INFO: MasarCode Agency Started [in F:\ÈÇíËæä\æßÇáÉ 2\app.py:35]
+2026-05-17 20:23:35,932 INFO: MasarCode Agency Started [in F:\ÈÇíËæä\æßÇáÉ 2\app.py:35]
+2026-05-17 20:35:01,207 INFO: MasarCode Agency Started [in F:\ÈÇíËæä\æßÇáÉ 2\app.py:35]
