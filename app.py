@@ -3,7 +3,7 @@ import re
 import logging
 from logging.handlers import RotatingFileHandler
 from flask import Flask, render_template, request, redirect, url_for, flash, jsonify, make_response
-from flask_wtf import FlaskForm, CSRFProtect
+from flask_wtf import FlaskForm
 from wtforms import StringField, EmailField, TextAreaField, SubmitField
 from wtforms.validators import DataRequired, Email, Length, Regexp
 from dotenv import load_dotenv
@@ -19,22 +19,26 @@ app.config['SECRET_KEY'] = os.environ.get('SECRET_KEY', os.urandom(32).hex())
 app.config['SESSION_COOKIE_SECURE'] = True          # إرسال cookies فقط عبر HTTPS
 app.config['SESSION_COOKIE_HTTPONLY'] = True        # منع الوصول للكوكيز عبر JS
 app.config['SESSION_COOKIE_SAMESITE'] = 'Lax'       # حماية CSRF
-app.config['WTF_CSRF_ENABLED'] = True
-app.config['WTF_CSRF_TIME_LIMIT'] = 3600            # صلاحية رمز CSRF
+app.config['WTF_CSRF_ENABLED'] = False
+app.config['WTF_CSRF_TIME_LIMIT'] = 3600            # صلاحية رمز CSRF (معطلة في Serverless)
 
-# تهيئة الحماية CSRF
-csrf = CSRFProtect()
-csrf.init_app(app)
-
-# إعداد نظام التسجيل (Logging) لمراقبة الهجمات والمحاولات المشبوهة
-if not os.path.exists('logs'):
-    os.mkdir('logs')
-file_handler = RotatingFileHandler('logs/security.log', maxBytes=10240, backupCount=10)
-file_handler.setFormatter(logging.Formatter('%(asctime)s %(levelname)s: %(message)s [in %(pathname)s:%(lineno)d]'))
-file_handler.setLevel(logging.INFO)
-app.logger.addHandler(file_handler)
-app.logger.setLevel(logging.INFO)
-app.logger.info('MasarCode Agency啟動')
+# إعداد نظام التسجيل (Logging) — محمي ضد أخطاء الكتابة في بيئة Serverless
+try:
+    if not os.path.exists('logs'):
+        os.mkdir('logs')
+    file_handler = RotatingFileHandler('logs/security.log', maxBytes=10240, backupCount=10)
+    file_handler.setFormatter(logging.Formatter('%(asctime)s %(levelname)s: %(message)s [in %(pathname)s:%(lineno)d]'))
+    file_handler.setLevel(logging.INFO)
+    app.logger.addHandler(file_handler)
+    app.logger.setLevel(logging.INFO)
+    app.logger.info('MasarCode Agency啟動')
+except Exception:
+    stream_handler = logging.StreamHandler()
+    stream_handler.setFormatter(logging.Formatter('%(asctime)s %(levelname)s: %(message)s'))
+    stream_handler.setLevel(logging.INFO)
+    app.logger.addHandler(stream_handler)
+    app.logger.setLevel(logging.INFO)
+    app.logger.info('MasarCode Agency啟動 (stream)')
 
 # قائمة العناوين المسموح بها للأمان (منع Open Redirect)
 ALLOWED_REDIRECTS = {'/', '/contact', '/portfolio', '/services'}
@@ -146,6 +150,4 @@ def forbidden_config():
     app.logger.warning(f'محاولة وصول غير مصرح بها لملف التكوين من {request.remote_addr}')
     return make_response("Forbidden", 403)
 
-if __name__ == '__main__':
-    # في الإنتاج، استخدم خادم حقيقي مثل gunicorn ولا تضع debug=True
-    app.run(debug=False, host='0.0.0.0', port=5000)
+# لا تشغّل الخادم محلياً هنا - Vercel يتوقع وجود متغير `app` فقط
