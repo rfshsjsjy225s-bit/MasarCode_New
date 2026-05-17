@@ -1,6 +1,7 @@
 import os
 import re
 import logging
+import logging
 from logging.handlers import RotatingFileHandler
 from flask import Flask, render_template, request, redirect, url_for, flash, jsonify, make_response
 from flask_wtf import FlaskForm
@@ -31,7 +32,7 @@ try:
     file_handler.setLevel(logging.INFO)
     app.logger.addHandler(file_handler)
     app.logger.setLevel(logging.INFO)
-    app.logger.info('MasarCode Agency啟動')
+    app.logger.info('MasarCode Agency Started')
 except Exception:
     stream_handler = logging.StreamHandler()
     stream_handler.setFormatter(logging.Formatter('%(asctime)s %(levelname)s: %(message)s'))
