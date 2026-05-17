@@ -151,3 +151,7 @@ def forbidden_config():
     return make_response("Forbidden", 403)
 
 # لا تشغّل الخادم محلياً هنا - Vercel يتوقع وجود متغير `app` فقط
+
+# Alias expected by some WSGI adapters / serverless runtimes
+# Ensure a top-level `handler` name points to the Flask app
+handler = app
