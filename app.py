@@ -155,3 +155,4 @@ def forbidden_config():
 # Alias expected by some WSGI adapters / serverless runtimes
 # Ensure a top-level `handler` name points to the Flask app
 handler = app
+app = app
