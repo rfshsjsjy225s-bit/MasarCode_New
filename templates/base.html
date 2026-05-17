@@ -4,19 +4,14 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
     <title>مسارك كود | MasarCode - وكالة البرمجة والذكاء الاصطناعي</title>
-    <!-- Tailwind CSS + خطوط -->
     <script src="https://cdn.tailwindcss.com"></script>
-    <!-- تخصيص الثيم -->
     <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-    <!-- Font Awesome 6 -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
-    <!-- تخصيص CSS إضافي -->
     <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
     <style>
-        /* تعديل Tailwind لتتناسب مع الألوان المطلوبة */
         :root {
-            --bg-dark: #0a0a1a;    /* Dark Velvet Indigo */
-            --accent-green: #00ff88; /* Electric Python Green */
+            --bg-dark: #0a0a1a;
+            --accent-green: #00ff88;
             --gold-champagne: #e6c97e;
             --text-offwhite: #f0f0f0;
         }
@@ -50,34 +45,43 @@
             box-shadow: 0 10px 25px -5px rgba(0,255,136,0.2);
             transform: translateY(-5px);
         }
-        /* الأيقونات العائمة - تظهر فقط على الكمبيوتر */
+        /* ========== الأيقونات العائمة - إصلاح اللون الأخضر على الكمبيوتر ========== */
         .floating-social {
             position: fixed;
             bottom: 20px;
             left: 20px;
-            z-index: 50;
+            z-index: 999;
             display: flex;
             flex-direction: column;
             gap: 12px;
         }
         .floating-social a {
-            background: var(--bg-dark);
-            border: 1px solid var(--accent-green);
+            background: #0a0a1a;
+            border: 2px solid #00ff88;
             border-radius: 50%;
-            width: 48px;
-            height: 48px;
+            width: 50px;
+            height: 50px;
             display: flex;
             align-items: center;
             justify-content: center;
-            color: var(--accent-green);
+            color: #00ff88 !important;
+            font-size: 1.6rem;
             transition: all 0.3s;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.4);
+            text-decoration: none;
+        }
+        .floating-social a i {
+            color: #00ff88 !important;
+            font-size: 1.6rem;
         }
         .floating-social a:hover {
-            background: var(--accent-green);
-            color: var(--bg-dark);
+            background: #00ff88;
             transform: scale(1.1);
         }
-        /* الشريط السفلي للجوال - يظهر فقط على الشاشات الصغيرة */
+        .floating-social a:hover i {
+            color: #0a0a1a !important;
+        }
+        /* الشريط السفلي للجوال */
         .mobile-bottom-bar {
             display: none;
             position: fixed;
@@ -118,7 +122,6 @@
             color: #0a0a1a;
             transform: scale(0.95);
         }
-        /* إخفاء الأيقونات العائمة وإظهار الشريط السفلي على الجوال */
         @media (max-width: 768px) {
             .floating-social {
                 display: none;
@@ -130,7 +133,6 @@
                 padding-bottom: 70px;
             }
         }
-        /* شريط التمرير المخصص */
         ::-webkit-scrollbar {
             width: 8px;
         }
@@ -144,32 +146,20 @@
     </style>
 </head>
 <body class="antialiased">
-    <!-- الأيقونات العائمة (للكمبيوتر) -->
+    <!-- أيقونات التواصل العائمة (للكمبيوتر) - خضراء زاهية -->
     <div class="floating-social">
-        <a href="https://wa.link/df3wss" target="_blank" rel="noopener noreferrer"><i class="fab fa-whatsapp fa-lg"></i></a>
-        <a href="https://www.instagram.com/pylogicai" target="_blank" rel="noopener noreferrer"><i class="fab fa-instagram fa-lg"></i></a>
-        <a href="https://t.me/PyLogicAI" target="_blank" rel="noopener noreferrer"><i class="fab fa-telegram fa-lg"></i></a>
-        <a href="https://github.com/rfshsjsjy225s-bit/PyLogicAI_Project" target="_blank" rel="noopener noreferrer"><i class="fab fa-github fa-lg"></i></a>
+        <a href="https://wa.link/df3wss" target="_blank" rel="noopener noreferrer"><i class="fab fa-whatsapp"></i></a>
+        <a href="https://www.instagram.com/pylogicai" target="_blank" rel="noopener noreferrer"><i class="fab fa-instagram"></i></a>
+        <a href="https://t.me/PyLogicAI" target="_blank" rel="noopener noreferrer"><i class="fab fa-telegram"></i></a>
+        <a href="https://github.com/rfshsjsjy225s-bit/PyLogicAI_Project" target="_blank" rel="noopener noreferrer"><i class="fab fa-github"></i></a>
     </div>
 
-    <!-- الشريط السفلي للجوال (يظهر فقط على الهواتف) -->
+    <!-- الشريط السفلي للجوال -->
     <div class="mobile-bottom-bar">
-        <a href="https://wa.link/df3wss" target="_blank" rel="noopener noreferrer">
-            <i class="fab fa-whatsapp"></i>
-            <span>واتساب</span>
-        </a>
-        <a href="https://www.instagram.com/pylogicai" target="_blank" rel="noopener noreferrer">
-            <i class="fab fa-instagram"></i>
-            <span>انستقرام</span>
-        </a>
-        <a href="https://t.me/PyLogicAI" target="_blank" rel="noopener noreferrer">
-            <i class="fab fa-telegram"></i>
-            <span>تليجرام</span>
-        </a>
-        <a href="https://github.com/rfshsjsjy225s-bit/PyLogicAI_Project" target="_blank" rel="noopener noreferrer">
-            <i class="fab fa-github"></i>
-            <span>GitHub</span>
-        </a>
+        <a href="https://wa.link/df3wss" target="_blank"><i class="fab fa-whatsapp"></i><span>واتساب</span></a>
+        <a href="https://www.instagram.com/pylogicai" target="_blank"><i class="fab fa-instagram"></i><span>انستقرام</span></a>
+        <a href="https://t.me/PyLogicAI" target="_blank"><i class="fab fa-telegram"></i><span>تليجرام</span></a>
+        <a href="https://github.com/rfshsjsjy225s-bit/PyLogicAI_Project" target="_blank"><i class="fab fa-github"></i><span>GitHub</span></a>
     </div>
 
     <!-- شريط التنقل -->
@@ -193,7 +183,7 @@
         {% block content %}{% endblock %}
     </main>
 
-    <!-- Footer موحد مع وسائل التواصل -->
+    <!-- Footer -->
     <footer class="bg-[#070714] border-t border-[#00ff88]/20 py-12 mt-20">
         <div class="container mx-auto px-6 grid grid-cols-1 md:grid-cols-4 gap-8 text-center md:text-right">
             <div>
@@ -238,7 +228,6 @@
     </footer>
 
     <script src="{{ url_for('static', filename='js/main.js') }}"></script>
-    <!-- حماية XSS -->
     <script>
         document.querySelectorAll('input, textarea').forEach(el => {
             el.addEventListener('input', function(e) {
